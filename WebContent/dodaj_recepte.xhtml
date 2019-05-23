@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">  
+  	
+    <h:head>
+    	<title>Doctor</title>
+    </h:head>
+    
+    <h:body>
+        
+		<h:form>
+			
+			<div align="left">
+				<table bgcolor="#0084ed" width="100%">
+					<tr>
+						<td align="left">
+							&nbsp;&nbsp;
+							<p:commandLink action="index" value="Back to main menu" style="color:white; text-decoration:none;"/>
+						</td>
+						<td align="right">
+							<font color="white">
+								|&nbsp;&nbsp;2013&nbsp;&nbsp;&copy;&nbsp;&nbsp;Jakub Bednarski&nbsp;&nbsp;
+							</font>
+						</td>
+					</tr>
+				</table>
+			</div>
+			
+			<br/><br/>
+			
+			<div align="center">
+					
+				<table width="100%">
+					
+					<tr>
+						<td colspan="11" align="center" bgcolor="#3a75c4"><font color="white"><b>NEW PRESCRIPTION</b></font></td>
+					</tr>
+					<tr>
+						<td colspan="11" align="center" bgcolor="#83afcc"><b>PATIENT</b></td>
+					</tr>
+					<tr>
+						<td><p:outputLabel value="Name"/></td>
+						<td><p:inputText value="#{dodajRecepteBean.pImie}" /></td>
+						<td><p:outputLabel value="Surname"/></td>
+						<td><p:inputText value="#{dodajRecepteBean.pNazwisko}" /></td>
+						<td><p:outputLabel value="Personal identity number (PESEL)"/></td>
+						<td><p:inputText value="#{dodajRecepteBean.pPesel}" /></td>
+						<td><p:outputLabel value="Authentication"/></td>
+						<td><p:inputText value="#{dodajRecepteBean.pPoswiadczenie}"/></td>
+						<td><p:outputLabel value="City"/></td>
+						<td><p:inputText value="#{dodajRecepteBean.pMiejscowosc}" /></td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td><p:outputLabel value="Street"/></td>
+						<td><p:inputText value="#{dodajRecepteBean.pUlica}" /></td>
+						<td><p:outputLabel value="Building no."/></td>
+						<td><p:inputText value="#{dodajRecepteBean.pNrDomu}" /></td>
+						<td><p:outputLabel value="Apartment no."/></td>
+						<td><p:inputText value="#{dodajRecepteBean.pNrLokalu}" /></td>				
+						<td><p:outputLabel value="Zip code"/></td>
+						<td><p:inputText value="#{dodajRecepteBean.pKodPocztowy}" /></td>				
+						<td><p:outputLabel value="Post"/></td>
+						<td><p:inputText value="#{dodajRecepteBean.pPoczta}" /></td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center" bgcolor="#83afcc"><b>HEEALTHCARE PROVIDER</b></td>
+						<td colspan="2" align="center" bgcolor="#83afcc"><b>DETAILS</b></td>
+						<td colspan="7" align="center" bgcolor="#83afcc"><b>PRESCRIPTIONS ITEMS</b></td>
+					</tr>
+					<tr>
+						<td><p:outputLabel value="Name"/></td>
+						<td><p:inputText value="#{dodajRecepteBean.sNazwa}" /></td>
+						<td><p:outputLabel value="Number"/></td>
+						<td><p:inputText id="numer" value="#{dodajRecepteBean.numer}" disabled="true" /></td>
+						<td><p:outputLabel value="Drug"/></td>
+						<td><p:outputLabel value="Dosage"/></td>
+						<td><p:outputLabel value="Unit"/></td>
+						<td><p:outputLabel value="Frequency"/></td>
+						<td><p:outputLabel value="Quantity"/></td>
+						<td><p:outputLabel value="Unit"/></td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td><p:outputLabel value="Street"/></td>
+						<td><p:inputText value="#{dodajRecepteBean.sUlica}" /></td>
+						<td><p:outputLabel value="Polish National Healt Insitution Department"/></td>
+						<td><p:inputText value="#{dodajRecepteBean.oddzialNfz}" /></td>
+						<td><p:inputText value="#{dodajRecepteBean.lek_nazwa}"><f:ajax event="blur" listener="#{dodajRecepteBean.setValue}"/></p:inputText></td>
+						<td><p:inputText value="#{dodajRecepteBean.lek_dawka}"><f:ajax event="blur" listener="#{dodajRecepteBean.setValue}"/></p:inputText></td>
+						<td><p:inputText value="#{dodajRecepteBean.lek_dJednostka}"><f:ajax event="blur" listener="#{dodajRecepteBean.setValue}"/></p:inputText></td>
+						<td><p:inputText value="#{dodajRecepteBean.lek_czestosc}"><f:ajax event="blur" listener="#{dodajRecepteBean.setValue}"/></p:inputText></td>
+						<td><p:inputText value="#{dodajRecepteBean.lek_ilosc}"><f:ajax event="blur" listener="#{dodajRecepteBean.setValue}"/></p:inputText></td>
+						<td><p:inputText value="#{dodajRecepteBean.lek_iJednostka}"><f:ajax event="blur" listener="#{dodajRecepteBean.setValue}"/></p:inputText></td>
+						<td>
+							<h:commandButton value="Add">
+								<f:ajax event="click" render="pozycje" listener="#{dodajRecepteBean.dodajSpec}"/>
+							</h:commandButton>
+						</td>
+					</tr>
+					<tr>
+						<td><p:outputLabel value="Building no."/></td>
+						<td><p:inputText value="#{dodajRecepteBean.sNrDomu}" /></td>
+						<td><p:outputLabel value="Rights"/></td>
+						<td><p:inputText value="#{dodajRecepteBean.uprawnienia}" /></td>
+						<td rowspan="7" colspan="7" valign="top">
+												
+							<p:contextMenu for="pozycje">  
+						        <p:menuitem value="Delete" update="pozycje" icon="ui-icon-close" actionListener="#{dodajRecepteBean.usunPoz}"/>  
+						    </p:contextMenu> 
+													
+							<p:dataTable var="spec" id="pozycje" rendered="true"
+									value="#{dodajRecepteBean.specyfikacja}" 
+									emptyMessage="Empty list" rowKey="#{spec.lek_nazwa}"
+                 					selection="#{dodajRecepteBean.wybranaPoz}" selectionMode="single">  
+						        <p:column headerText="Drug">  
+						            <h:outputText value="#{spec.lek_nazwa}" />  
+						        </p:column>  
+						  
+						  		<p:column headerText="Dosage">  
+						            <h:outputText value="#{spec.lek_dawka}" />  
+						        </p:column> 
+						       
+						       <p:column headerText="Unit">  
+						            <h:outputText value="#{spec.lek_dJednostka}" />  
+						        </p:column> 
+						        
+						        <p:column headerText="Frequency">  
+						            <h:outputText value="#{spec.lek_czestosc}" />  
+						        </p:column> 
+						        
+						        <p:column headerText="Quantity">  
+						            <h:outputText value="#{spec.lek_ilosc}" />  
+						        </p:column> 
+						        
+						        <p:column headerText="Unit">  
+						            <h:outputText value="#{spec.lek_iJednostka}" />  
+						        </p:column> 
+						    </p:dataTable>
+						   
+						</td>
+					</tr>
+					<tr>
+						<td><p:outputLabel value="Apartment no."/></td>
+						<td><p:inputText value="#{dodajRecepteBean.sNrLokalu}" /></td>
+						<td><p:outputLabel value="Chronic diseases"/></td>
+						<td><p:selectBooleanCheckbox value="#{dodajRecepteBean.chorobyPrzewlekle}"/></td>
+					</tr>
+					<tr>
+						<td><p:outputLabel value="Zip code"/></td>
+						<td><p:inputText value="#{dodajRecepteBean.sKodPocztowy}" /></td>
+						<td><p:outputLabel value="Date of issue"/></td>
+						<td><p:calendar value="#{dodajRecepteBean.data}" pattern="dd-MM-yyy" /></td>
+					</tr>
+					<tr>
+						<td><p:outputLabel value="Post"/></td>
+						<td><p:inputText value="#{dodajRecepteBean.sPoczta}" /></td>
+						<td><p:outputLabel value="Execution date of"/></td>
+						<td><p:calendar value="#{dodajRecepteBean.dataRealizacajiOd}" pattern="dd-MM-yyy"/>  </td>
+					</tr>
+					<tr>
+						<td><p:outputLabel value="City"/></td>
+						<td><p:inputText value="#{dodajRecepteBean.sMiejscowosc}" /></td>
+						<td><p:outputLabel value="Doctor name"/></td>
+						<td><p:inputText value="#{dodajRecepteBean.lImie}" /></td>
+					</tr>
+					<tr>
+						<td><p:outputLabel value="Phone"/></td>
+						<td><p:inputText value="#{dodajRecepteBean.sTelefon}" /></td>
+						<td><p:outputLabel value="Doctor surname"/></td>
+						<td><p:inputText value="#{dodajRecepteBean.lNazwisko}" /></td>
+					</tr>
+					<tr>
+						<td><p:outputLabel value="ID"/></td>
+						<td><p:inputText value="#{dodajRecepteBean.sIdent}" /></td>
+						<td><p:outputLabel value="Number of the license to practice"/></td>
+						<td><p:inputText value="#{dodajRecepteBean.lNrPrawa}" /></td>
+					</tr>
+					<tr>
+						<td colspan="11" align="right"  bgcolor="#3a75c4">
+							<h:commandButton value="Clear" actionListener="#{dodajRecepteBean.wyczysc}"/>
+							<h:commandButton value="Verify" actionListener="#{dodajRecepteBean.weryfikujRecepte}" disabled="#{!dodajRecepteBean.weryfikacja}">
+								<f:ajax render="@form" event="mouseup"/>
+							</h:commandButton>
+							<h:commandButton id="zap" value="Save" action="#{dodajRecepteBean.zapisz}" disabled="#{dodajRecepteBean.weryfikacja}"/>
+						</td>
+					</tr>
+				</table>	
+					
+			</div>
+				
+    	</h:form>
+    	
+    </h:body> 
+</html>  
